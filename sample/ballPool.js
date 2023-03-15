@@ -19,9 +19,9 @@ var render = Render.create({
     element: document.body,
     engine: engine,
     options: {
-        width: 800,
-        height: 600,
-        showAngleIndicator: true
+        width: window.innerWidth,
+        height: window.innerHeight,
+        showAngleIndicator: false
     }
 });
 
@@ -42,7 +42,7 @@ var stack = Composites.stack(100, 0, 10, 8, 10, 10, function(x, y) {
 
 Composite.add(world, [
     stack,
-    Bodies.polygon(200, 460, 3, 60),
+    Bodies.polygon(100, 460, 3, 60),
     Bodies.polygon(400, 460, 4, 60),
     Bodies.rectangle(600, 460, 80, 80)
 ]);
@@ -79,6 +79,12 @@ for (var i = 0; i < allBodies.length; i += 1) {
         max: { x: render.bounds.max.x + 100, y: render.bounds.max.y }
     };
 }
+
+
+window.addEventListener('resize', function(){
+    render.options.width = window.innerWidth
+    render.options.height = window.innerHeight
+})
 
 // context for MatterTools.Demo
 return {
